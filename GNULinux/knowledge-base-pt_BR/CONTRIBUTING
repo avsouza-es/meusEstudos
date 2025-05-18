@@ -1,0 +1,41 @@
+# Como Contribuir
+
+Este projeto é aberto à contribuição de todos os níveis — especialmente de administradores GNU/Linux que querem organizar, revisar e expandir conhecimento técnico.
+
+---
+
+## 📋 Regras Básicas
+
+1. **Crie uma branch nova** antes de alterar algo.
+2. **Use commits claros e objetivos** (ex: `Atualiza guia de segurança SSH`).
+3. **Envie Pull Requests** com descrição do que foi alterado.
+4. Mantenha o padrão **Markdown** e linguagem técnica clara.
+5. Se possível, **valide comandos e scripts** antes de submeter.
+
+---
+
+## 📚 Onde Contribuir
+
+Você pode ajudar com:
+- Correção de erros gramaticais ou técnicos
+- Atualização de comandos obsoletos
+- Adição de novos tópicos ou exemplos
+- Tradução de partes para inglês (opcional)
+- Criação de diagramas ou imagens explicativas
+
+---
+
+## 🧪 Testes Locais
+
+Antes de enviar um PR:
+- Verifique links internos e externos
+- Execute scripts quando aplicável
+- Confira formatação Markdown
+
+---
+
+## 💬 Feedback e Comunicação
+
+Se tiver dúvidas ou sugestões, use as **issues do GitHub**.
+
+Contribua com qualidade e respeito ao trabalho coletivo!
