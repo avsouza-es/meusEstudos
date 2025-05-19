@@ -1,0 +1,96 @@
+# Instalação e Configuração Básica do OpenSSH-Server no Ubuntu 22.04  
+
+## 1. Introdução  
+### Objetivo  
+Ensinar a instalar e configurar o `openssh-server` para acesso remoto seguro no Ubuntu 22.04.  
+
+### Público-Alvo  
+- Administradores de sistemas GNU/Linux Júnior  
+- DevOps e DevOpsSec iniciantes  
+
+### Pré-requisitos  
+- Conhecimento básico de CLI (Comandos como `sudo`, `apt`, `systemctl`).  
+- Acesso root ou sudo no servidor.  
+
+---
+
+## 2. História do SSH  
+O protocolo SSH foi criado em **1995 por Tatu Ylönen** (Universidade de Helsinque, Finlândia) para substituir protocolos inseguros como **Telnet e FTP**, que transmitiam credenciais em texto claro.  
+
+### Características Chave  
+- **Criptografia**: Dados trafegados são ilegíveis por terceiros.  
+- **Autenticação**: Verifica a identidade do servidor e do cliente.  
+- **Integridade**: Detecta modificações não autorizadas durante a transmissão.  
+
+> **⚠️ Aviso de Segurança**  
+> Sem SSH, credenciais podem ser roubadas em ataques *Man-in-the-Middle (MITM)*.  
+
+---
+
+## 3. Instalação do OpenSSH-Server  
+
+### Verificar Instalação Existente  
+```bash
+dpkg -l | grep openssh-server
+```
+
+### Atualizar o Sistema  
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+### Instalar o OpenSSH-Server  
+```bash
+sudo apt install -y openssh-server
+```
+
+### Habilitar e Verificar o Serviço  
+```bash
+sudo systemctl enable --now ssh  
+sudo systemctl status ssh  # Deve mostrar "active (running)"
+```
+
+### Testar Conexão Local  
+```bash
+ssh localhost
+```
+
+---
+
+## 4. Configuração Mínima de Segurança  
+
+### Editar o Arquivo de Configuração  
+```bash
+sudo vi /etc/ssh/sshd_config
+```
+
+### Alterações Recomendadas  
+```ini
+PermitRootLogin no          # Desativa login root via SSH (crítico!)
+PasswordAuthentication yes  # Altere para "no" após configurar chaves SSH (ver "Próximos Passos")
+```
+
+### Reiniciar o Serviço  
+```bash
+sudo systemctl restart ssh
+```
+
+---
+
+## 5. Próximos Passos  
+- [ ] **Autenticação por Chaves Públicas**:  
+  - Gerar chaves: `ssh-keygen` (Linux) ou PuTTYgen (Windows).  
+  - Copiar chave pública: `ssh-copy-id usuario@servidor`.  
+- [ ] **Firewall**:  
+  - Restringir acesso à porta SSH com `ufw` (`sudo ufw allow 22/tcp`).  
+- [ ] **Fail2Ban**:  
+  - Bloquear tentativas de brute force.  
+
+---
+
+## FAQ Rápido  
+**P:** Por que `PermitRootLogin no` é importante?  
+**R:** Reduz o risco de ataques diretos à conta root (alvo prioritário de hackers).  
+
+**P:** Posso usar SSH sem senha?  
+**R:** Sim, com chaves públicas (mais seguro que senhas). Veja [este guia](https://linux.die.net/man/1/ssh-keygen).  
