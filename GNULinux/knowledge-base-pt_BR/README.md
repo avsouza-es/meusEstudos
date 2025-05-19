@@ -25,6 +25,7 @@ knowledge-base/
 │   ├── comandos-basicos.md (fase de criação)
 │   ├── gerenciamento-usuarios.md (fase de criação)
 │   └── guia-shell-script-basico.md (fase de criação)
+|   └── instalação-openserver-ssh.md (concluído) 
 ├── pleno/
 └── senior/
  
