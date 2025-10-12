@@ -1,0 +1,22 @@
+-- 1. Cria o banco de dados
+CREATE DATABASE corporativo_ficticio;
+
+-- 2. Seleciona o banco de dados para uso
+USE corporativo_ficticio;
+
+-- 3. Cria a tabela de usuários
+CREATE TABLE usuarios (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    cargo VARCHAR(100),
+    senha VARCHAR(255), -- Em um ambiente real, NUNCA armazene senhas em texto plano!
+    PRIMARY KEY (id)
+);
+
+-- 4. Insere dados fictícios para os testes
+INSERT INTO usuarios (nome, cargo, senha) VALUES
+('Alice Silva', 'Analista de Sistemas', 'senha123'),
+('Bruno Costa', 'Gerente de Projetos', 'password@!'),
+('Carlos Dias', 'Desenvolvedor Pleno', 'admin'),
+('Daniela Souza', 'DBA', 'db@Ma5t3r'),
+('Eduardo Lima', 'Estagiário', 'estagio_2025');
