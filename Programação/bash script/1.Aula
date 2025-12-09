@@ -1,0 +1,115 @@
+Ótimo. Você já sabe criar e executar um arquivo. Agora vamos dar vida a ele.
+
+Um script "hardcoded" (com valores fixos) é um script morto. Se você precisa editar o código-fonte toda vez que quiser mudar o IP do servidor alvo ou o nome da pasta de backup, você não está automatizando; você está apenas digitando de forma complicada.
+
+Nesta aula, vamos transformar seu script em uma ferramenta reutilizável. Vamos abordar Variáveis e Argumentos (Input).
+
+Para quem foca em DevOps e Segurança, entender isso é vital: suas ferramentas precisam aceitar inputs externos para varrerem IPs diferentes, configurarem ambientes diferentes (Dev/Prod) ou analisarem logs distintos sem que você toque no código.
+
+1. Variáveis: A Memória de Curto Prazo
+No Bash, variáveis são espaços na memória onde guardamos informações. A sintaxe é enganosamente simples, mas tem uma "pegadinha" que derruba 90% dos iniciantes.
+
+A Regra de Ouro da Atribuição:
+
+NÃO USE ESPAÇOS ao redor do sinal de igual.
+
+❌ Errado: ALVO = 192.168.1.1 (O Bash acha que você está tentando rodar um comando chamado "ALVO").
+
+✅ Certo: ALVO=192.168.1.1
+
+Como usar (Interpolation): Para acessar o valor, usamos o cifrão $.
+
+Bash
+
+ALVO="google.com"
+echo "Iniciando ataque contra $ALVO..."
+Dica de Engenharia (Best Practice): Sempre proteja suas variáveis com aspas duplas ao usá-las.
+
+echo "$ALVO" Por que? Se o valor da variável contiver espaços (ex: "Meus Documentos"), o Bash pode interpretar como dois argumentos separados e quebrar seu script. Em segurança, não usar aspas abre brechas para injeção de falhas.
+
+2. Argumentos (Parâmetros Posicionais): A Interface
+Aqui é onde a mágica do DevOps e Hacking acontece. Você quer passar informações para o script no momento em que o executa.
+
+O Bash numera automaticamente tudo o que você digita após o nome do script:
+
+Comando: ./meu_script.sh 192.168.0.1 porta_80
+
+$0: O nome do script (./meu_script.sh)
+
+$1: O primeiro argumento (192.168.0.1)
+
+$2: O segundo argumento (porta_80)
+
+$#: O número total de argumentos passados (Útil para verificar se o usuário esqueceu de digitar algo).
+
+Prática: Criando um "Recon" Automatizado
+Vamos criar um script chamado recon.sh. Cenário: Você é um Pentester (ou SysAdmin) e precisa verificar rapidamente a conectividade de um servidor e salvar o resultado.
+
+1. Crie e abra o arquivo:
+
+Bash
+
+touch recon.sh
+chmod +x recon.sh
+nano recon.sh
+2. Digite o código abaixo: (Não copie cegamente. Leia os comentários para entender a engenharia por trás).
+
+Bash
+
+#!/bin/bash
+
+# --- Configuração ---
+ALVO=$1  # Pega o primeiro argumento digitado pelo usuário
+
+# --- Defensive Coding (Verificação de Segurança) ---
+# Se a variável ALVO estiver vazia (usuário não digitou nada), avisa e sai.
+# -z verifica se a string é "zero length" (vazia).
+if [ -z "$ALVO" ]; then
+    echo "Erro: Você precisa especificar um alvo."
+    echo "Uso correto: $0 <IP_ou_Dominio>"
+    exit 1
+fi
+
+# --- Execução ---
+echo "=== Iniciando Reconhecimento em: $ALVO ==="
+echo "Data: $(date)" # $(...) executa um comando dentro da string
+
+echo "[+] Verificando conectividade (Ping)..."
+# -c 2: manda apenas 2 pacotes (não fica rodando para sempre)
+ping -c 2 "$ALVO"
+
+echo "----------------------------------------"
+echo "Reconhecimento finalizado."
+3. Teste o script:
+
+Primeiro, teste o tratamento de erro (rode sem argumentos):
+
+Bash
+
+./recon.sh
+Resultado esperado: Ele deve reclamar e mostrar como usar. Isso é User Experience (UX) no terminal.
+
+Agora, teste com um alvo real (pode ser o Google ou seu roteador):
+
+Bash
+
+./recon.sh 8.8.8.8
+Insight de Liderança Técnica (O "Pulo do Gato")
+Você pode perguntar: "Mentox, por que usar $1 e não usar o comando read para perguntar ao usuário qual é o IP?"
+
+O comando read (que pausa o script e pede input) é ótimo para scripts interativos locais. Porém, é terrível para automação.
+
+No mundo DevOps e Cloud, scripts rodam sozinhos em servidores de CI/CD (como Jenkins, GitHub Actions) no meio da madrugada. Não tem ninguém lá para digitar o IP. Scripts profissionais são desenhados para receber argumentos na linha de comando, pois assim podem ser orquestrados por outros robôs.
+
+Exemplo de encadeamento (Poder do Linux): Se você tiver uma lista de IPs num arquivo lista.txt, você poderia usar seu script recon.sh neles automaticamente (não faça isso agora, é só um exemplo do poder dos argumentos): xargs -n 1 ./recon.sh < lista.txt
+
+Desafio para a Próxima Etapa
+Para fixar esse conhecimento, preciso que você modifique o recon.sh sozinho:
+
+Adicione uma nova funcionalidade: O script deve receber um segundo argumento ($2) que será o nome de um arquivo onde o resultado será salvo.
+
+Use o redirecionamento >> (que vimos na teoria da aula 1) para salvar a saída do ping dentro desse arquivo.
+
+Dica: Você vai precisar mudar a linha do ping para algo como ping ... >> "$VARIAVEL_DO_ARQUIVO".
+
+Tente fazer. Se travar, me avise. Se conseguir, cole o código aqui para o Code Review. Estamos prontos para a lógica condicional (if/else profundo) na próxima aula.
