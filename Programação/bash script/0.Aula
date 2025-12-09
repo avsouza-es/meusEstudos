@@ -1,0 +1,35 @@
+Fase 0: A Anatomia do Seu Novo Ambiente
+Antes de escrever scripts, você precisa saber onde está pisando. O Terminal é a interface, o Shell (Bash) é o interpretador de comandos, e o Kernel é o coração do sistema.
+Como alguém interessado em Segurança e Legado, grave isso: GUIs (interfaces gráficas) mentem ou simplificam. O Terminal diz a verdade.
+
+1. Navegação e Sobrevivência (O "WASD" do Linux)
+Você não consegue hackear ou administrar um servidor se não souber se mover dentro dele. Abra seu terminal e pratique estes comandos até que virem memória muscular:
+  pwd (Print Working Directory): "Onde eu estou?" Essencial para não deletar a pasta errada.
+  ls (List): Lista arquivos.
+  Use ls -l (formato longo) para ver permissões (crucial para segurança).
+  Use ls -a (all) para ver arquivos ocultos (que começam com ., onde configurações e malwares costumam se esconder).
+  cd (Change Directory): Mover-se.
+  cd / (vai para a raiz do sistema).
+  cd ~ (vai para sua pasta de usuário/home).
+  cd .. (volta um nível acima).
+
+2. Manipulação de Arquivos (Com perigo real)
+No Windows/Mac, quando você deleta algo, vai para a Lixeira. No terminal, rm é eterno. Não existe "Ctrl+Z" para um arquivo deletado via linha de comando.
+  touch arquivo.txt: Cria um arquivo vazio.
+  mkdir pasta: Cria um diretório.
+  cp origem destino: Copia.
+  mv origem destino: Move (ou renomeia).
+  rm arquivo: Remove. Cuidado extremo.
+  cat arquivo: Lê o conteúdo do arquivo na tela.
+Regra de Ouro do Staff Engineer: Antes de rodar um comando destrutivo (rm, mv) usando coringas (como *), rode um ls antes.
+  Errado: rm *.conf (Espero que apague só os configs...)
+  Certo: ls *.conf (Ah, vejo exatamente o que será apagado) -> rm *.conf.
+
+3. Permissões: A Base da Segurança
+Se você quer Hacking ou DevOps, permissões são 50% do jogo. O Linux foi feito para ser multiusuário desde 1970.
+  Ao dar ls -l, você verá algo como: -rwxr-xr--.
+    r (read): Leitura.
+    w (write): Escrita/Modificação.
+    x (execute): Execução (transforma texto em programa).
+Para alterar isso, usamos o chmod.
+  chmod +x script.sh (Torna o arquivo executável). Sem isso, seu script é apenas um texto inerte.
