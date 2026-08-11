@@ -1,29 +1,88 @@
-# Meus Estudos Técnicos 🚀
+# My Technical Studies
 
-Repositório central onde compartilho meu caminho de aprendizado nas áreas de **Programação**, **Administração GNU/Linux** e **Cibersegurança**.
+## About
 
----
+This repository is my technical knowledge base.
 
-## 📚 Estrutura dos Conteúdos
+I use this repository to store notes, labs and study materials.
 
-📁 **Java**: Fundamentos, POO, JDBC, projetos práticos  
-📁 **Bash Scripting**: Scripts úteis, automações diárias  
-📁 **GNU/Linux**: Administração, configuração de servidores, preparação LPIC-1  
-📁 **Cibersegurança**: Laboratórios, pentests, ferramentas e estudos  
-📁 **Homelab**: Setup e configurações do meu laboratório pessoal  
+Main topics:
 
----
-
-## 🛠️ Tecnologias em Foco
-
-![Java](https://img.shields.io/badge/Java-Frontier-blue?logo=java&logoColor=white )
-![Linux](https://img.shields.io/badge/Linux--0078D4?logo=linux&logoColor=white )
-![LPIC](https://img.shields.io/badge/LPIC--1-orange?logo=gnu&logoColor=white )
-![Bash](https://img.shields.io/badge/Bash-4EAA25?logo=gnu-bash&logoColor=white )
-![Security](https://img.shields.io/badge/Security-Red?logo=hackthebox&logoColor=white )
+- Linux Administration
+- Infrastructure
+- Networking
+- Cybersecurity
+- Bash
+- Python
 
 ---
 
-> 🌱 *"Aprendizado contínuo é a chave para crescer na área técnica."*
+## Repository Structure
 
-Explore os repositórios e fique à vontade para contribuir!
+### Linux
+
+Topics:
+
+- Commands
+- SSH
+- Hardening
+- Users and Groups
+- LPIC-1 Studies
+
+### Infrastructure
+
+Topics:
+
+- Docker
+- Proxmox
+- Virtualization
+- Monitoring
+
+### Cybersecurity
+
+Topics:
+
+- Blue Team
+- Vulnerability Management
+- SOC
+- ISO 27001
+
+### Scripting
+
+Automation with:
+
+- Bash
+- Python
+
+### Homelab
+
+Documentation about my personal lab.
+
+---
+
+## Career Goal
+
+I am building strong skills in:
+
+- Linux
+- Infrastructure
+- Cybersecurity
+
+My long-term goal is to work with Penetration Testing.
+
+---
+
+## Technologies
+
+- Linux
+- Bash
+- Python
+- Docker
+- Git
+- TCP/IP Networking
+
+---
+
+## Note
+
+This repository is for educational purposes and technical documentation.
